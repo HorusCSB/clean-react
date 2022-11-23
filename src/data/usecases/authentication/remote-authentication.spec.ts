@@ -1,15 +1,10 @@
-import { RemoteAuthentication } from './remote-authentication'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { HttpPostClient } from '../../protocols/http/http-post-client'
+import { RemoteAuthentication } from './remote-authentication'
+import { HttpPostClientSpy } from '../../test/mock-http-client'
 
 describe('RemoteAuthentication', () => {
   test('Should call httpPostClient with correct URL', async () => {
-    class HttpPostClientSpy implements HttpPostClient {
-      url?: string
-      async post (url: string): Promise<void> {
-        this.url = url
-        return Promise.resolve()
-      }
-    }
     const url = 'qlqr'
     const httpPostClientSpy = new HttpPostClientSpy()
     const sut = new RemoteAuthentication(url, httpPostClientSpy)
